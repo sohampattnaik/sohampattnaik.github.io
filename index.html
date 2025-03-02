@@ -600,7 +600,71 @@ Feel free to explore my website to learn more about my projects, achievements, a
                     </div>
                 </div>
             </div>
-        </section>       
+        </section>  
+        
+        <!--
+        ===================
+           QUIZ - ARENA
+        ===================
+        -->
+        <section class="mh-experince image-bg quiz-image" id="mh-experience">
+    <div class="img-color-overlay">
+        <div class="container">
+            <div class="row section-separator">
+                <div class="col-sm-12 text-center section-title wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.2s; animation-name: fadeInUp;">
+                    <h2>Quiz</h2>
+                </div>
+                <div class="col-sm-12">
+                    <div class="mh-work">
+                        <form id="quizform" class="single-form quate-form wow fadeInUp" data-toggle="validator" novalidate="true" style="visibility: visible; animation-name: fadeInUp;">
+                            <div class="mh-experience-deatils">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <!-- Question 1 -->
+                                        <div class="mh-quiz-item dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">
+                                            <h4>1. What is the sum of 45 and 37?</h4>
+                                            <div class="mh-eduyear">
+                                                <label><input type="radio" name="q1" value="72" required> 72</label><br>
+                                                <label><input type="radio" name="q1" value="82" required> 82</label><br>
+                                                <label><input type="radio" name="q1" value="92" required> 92</label><br>
+                                                <label><input type="radio" name="q1" value="102" required> 102</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <!-- Question 2 -->
+                                        <div class="mh-quiz-item dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">
+                                            <h4>2. What is 12 multiplied by 8?</h4>
+                                            <div class="mh-eduyear">
+                                                <label><input type="radio" name="q2" value="96" required> 96</label><br>
+                                                <label><input type="radio" name="q2" value="84" required> 84</label><br>
+                                                <label><input type="radio" name="q2" value="104" required> 104</label><br>
+                                                <label><input type="radio" name="q2" value="88" required> 88</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                                <!-- Repeat for Questions 3 to 10 with the `required` attribute -->
+                                 <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <input name="name" class="contact-name form-control" id="name" type="text" placeholder="Name" required="">
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <input name="name" class="contact-email form-control" id="email" type="email" placeholder="Email" required="">
+                                    </div>
+                                 </div>
+                            </div>
+                            <div class="btn-form col-sm-12">
+                                <br>
+                                <button type="submit" class="btn btn-fill btn-block" id="form-submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
         
         
         <!--
@@ -734,6 +798,8 @@ Feel free to explore my website to learn more about my projects, achievements, a
     <script src="assets/plugins/js/jquery.nav.js"></script>
     <!-- Fancybox js-->
     <script src="assets/plugins/js/jquery.fancybox.min.js"></script>
+    <!-- Crypto JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <!-- Map api -->
     <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&amp;key=AIzaSyCRP2E3BhaVKYs7BvNytBNumU0MBmjhhxc"></script>
     <!-- isotope js-->
@@ -747,7 +813,7 @@ Feel free to explore my website to learn more about my projects, achievements, a
     <script src="assets/js/map-init.js"></script>
     <script src="assets/js/custom-scripts.js"></script>
     <script src="js/email.js"></script>
-
+    <script src="assets/js/demo.js"></script>
     <!-- ****************
       After neccessary customization/modification, Please minify 
       JavaScript/jQuery according to http://browserdiet.com/en/ for better performance

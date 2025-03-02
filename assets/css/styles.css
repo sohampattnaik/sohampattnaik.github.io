@@ -661,6 +661,10 @@ ul li {
   background-image: url(../images/map-color-overlay.png);
 }
 
+.quiz-image {
+  background-image: url(../images/map-color-overlay.png);
+}
+
 .mt-30 {
   margin-top: 30px;
 }
@@ -1905,6 +1909,13 @@ li .fa {
 
 .mh-work .mh-experience-deatils .mh-work-item:last-child {
   margin-bottom: 0;
+}
+.mh-work .mh-experience-deatils .mh-quiz-item:last-child {
+  margin-bottom: 30px;
+  padding: 20px 30px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 .mh-work .mh-experience-deatils .mh-work-item h4 {
@@ -3896,4 +3907,16 @@ BLOG Pagination
 
 #logo_soham{
   text-shadow: 2px 2px 0px #0bceaf, 5px 4px 0px rgba(0,0,0,0.15);
+}
+
+div#resultsTable {
+  background: #b6ffc7;
+  color: #28a745;
+  padding: 2%;
+  border-radius: 10px;
+  opacity: 0.9;
+}
+
+div#resultsTable h2, div#resultsTable p {
+  color: #28a745;
 }
