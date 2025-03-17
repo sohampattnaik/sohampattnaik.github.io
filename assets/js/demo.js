@@ -1,134 +1,118 @@
-const demoName = "MzcxMzBjNTkyNmFlMmE2MzQ4MzJlZGQxZDNiNTg1YmM=";
-const demoSurname = "YzgyNjM5Yzk1ODQ4MDNhNDFlMDMxYzUwOGQ3ZDc1YTQ=";
-
-function capitalization_dec(encodedText) {
-    return atob(encodedText);
-}
-
-// Function to send email using Mailjet API
-async function sendEmail(name, email, results) {
-    const MJ_APIKEY_PUBLIC = capitalization_dec(demoName); // Replace with your Mailjet public key
-    const MJ_APIKEY_PRIVATE = capitalization_dec(demoSurname); // Replace with your Mailjet private key
-    const url = "https://api.mailjet.com/v3.1/send";
-    const headers = new Headers({
-        "Content-Type": "application/json",
-        "Authorization": "Basic " + btoa(`${MJ_APIKEY_PUBLIC}:${MJ_APIKEY_PRIVATE}`)
-    });
-    // Convert results to an HTML table
-    const resultsTable = `
-        <table style="width: 100%; border-collapse: collapse;">
-            <thead>
-                <tr>
-                    <th style="border: 1px solid #333; padding: 8px;">Field</th>
-                    <th style="border: 1px solid #333; padding: 8px;">Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="border: 1px solid #333; padding: 8px;">Name</td>
-                    <td style="border: 1px solid #333; padding: 8px;">${name}</td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid #333; padding: 8px;">Email</td>
-                    <td style="border: 1px solid #333; padding: 8px;">${email}</td>
-                </tr>
-                ${results.map(result => `
-                    <tr>
-                        <td style="border: 1px solid #333; padding: 8px;">${result.question}</td>
-                        <td style="border: 1px solid #333; padding: 8px;">${result.answer}</td>
-                    </tr>
-                `).join("")}
-            </tbody>
-        </table>
-    `;
-    const emailData = {
-        "Messages": [
-            {
-                "From": {
-                    "Email": "info@sohampattnaik.infinityfreeapp.com",
-                    "Name": "Soham Pattnaik"
-                },
-                "To": [
-                    {
-                        "Email": "lovelysin1990@gmail.com",
-                        "Name": "Sin Chang"
-                    }
-                ],
-                "Subject": `New Hit - Quiz Inputs by ${name}`,
-                "TextPart": "Dear Soham, You have received a new quiz submission.",
-                "HTMLPart": `
-                    <h3>Dear Soham, You have received a new quiz submission:</h3>
-                    <p><strong>Name:</strong> ${name}</p>
-                    <p><strong>Email:</strong> ${email}</p>
-                    <br />
-                    ${resultsTable}
-                    <br />
-                    <p>Thank you for taking the quiz!</p>
-                `
-            }
-        ]
-    };
+// Function to send data to the Flask backend
+async function sendData(data) {
     try {
-        const response = await fetch(url, {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify(emailData)
+        const response = await fetch('http://127.0.0.1:5000/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
         });
 
         const result = await response.json();
-        console.log("Mailjet Response:", result);
+        if (response.ok) {
+            alert(result.message);
+        } else {
+            alert(result.error);
+        }
     } catch (error) {
-        console.error("Error sending email:", error);
+        alert('An error occurred while submitting the form.');
     }
-    // Clear form after submission
-    document.getElementById("quizform").reset();
+}
+// Function to validate email format
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email regex
+    return emailRegex.test(email);
 }
 
-// Function to handle form submission
-document.getElementById("quizform").addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent the form from submitting normally
+// Function to validate the form
+function validateForm(form) {
+    let isValid = true;
 
-    const form = document.getElementById("quizform");
-    const results = [];
-    const questions = form.querySelectorAll(".mh-quiz-item");
-    const name = form.querySelector("#name").value;
-    const email = form.querySelector("#email").value;
+    // Validate name
+    const name = form.querySelector("#name").value.trim();
+    if (!name) {
+        isValid = false;
+        alert("Please fill out your name.");
+    }
 
-    let allAnswered = true;
+    // Validate email
+    const email = form.querySelector("#email").value.trim();
+    if (!email) {
+        isValid = false;
+        alert("Please fill out your email.");
+    } else if (!validateEmail(email)) {
+        isValid = false;
+        alert("Please enter a valid email address.");
+    }
 
     // Validate quiz questions
-    questions.forEach((question, index) => {
-        const questionText = question.querySelector("h4")?.innerText;
+    const questions = form.querySelectorAll(".mh-quiz-item");
+    questions.forEach((question) => {
         const selectedOption = question.querySelector("input[type='radio']:checked");
-
-        if (questionText && selectedOption) {
-            results.push({
-                question: questionText,
-                answer: selectedOption.value
-            });
-        } else if (questionText && !selectedOption) {
-            allAnswered = false;
+        if (!selectedOption) {
+            isValid = false;
             question.style.border = "1px solid red"; // Highlight unanswered questions
+        } else {
+            question.style.border = ""; // Reset border if answered
         }
     });
 
-    // Validate name and email
-    if (!name || !email) {
-        allAnswered = false;
-        alert("Please fill out your name and email.");
-    }
+    return isValid;
+}
 
-    if (allAnswered) {
-        sendEmail(name, email, results); // Send email with results
-        displayResults(results, name, email);
-    } else {
-        alert("Please answer all questions and fill out your name and email before submitting.");
-    }
-});
+// Function to collect form data
+function collectFormData(form) {
+    const name = form.querySelector("#name").value.trim();
+    const email = form.querySelector("#email").value.trim();
+    const grade = form.querySelector("#grade").value.trim();
+    const feedback = form.querySelector("#feedback").value.trim();
+    const questions = form.querySelectorAll(".mh-quiz-item");
+
+    const results = [];
+    questions.forEach((question) => {
+        const questionText = question.querySelector("h4")?.innerText;
+        const selectedOption = question.querySelector("input[type='radio']:checked");
+        if (questionText && selectedOption) {
+            results.push({
+                question: questionText,
+                answer: selectedOption.value,
+            });
+        }
+    });
+
+    return {
+        name: name,
+        email: email,
+        grade: grade,
+        feedback: feedback,
+        questions: results,
+    };
+}
+
+// Function to handle file upload
+function handleFileUpload(formData) {
+    return new Promise((resolve) => {
+        const fileInput = document.getElementById('imageUpload');
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onload = function () {
+                // Add file data to formData
+                formData.file = reader.result;  // Base64-encoded file
+                formData.filename = file.name;
+                resolve(formData);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            resolve(formData); // No file to upload
+        }
+    });
+}
 
 // Function to display results in a table
 function displayResults(results, name, email) {
-    const textDiv = document.createElement("div")
+    const textDiv = document.createElement("div");
     const table = document.createElement("table");
     table.style.width = "100%";
     table.style.borderCollapse = "collapse";
@@ -137,7 +121,7 @@ function displayResults(results, name, email) {
         <h2>Your Request was successfully submitted</h2>
         <h2>Thank you for taking the quiz!</h3>
         <p>You will hear back your results from Soham shortly, Meanwhile review your submissions:</p>
-    `
+    `;
     table.innerHTML = `
         <thead>
              <tr>
@@ -153,7 +137,7 @@ function displayResults(results, name, email) {
                  </tr>
              `).join("")}
          </tbody>
-    `
+    `;
 
     const resultsDiv = document.createElement("div");
     resultsDiv.id = "resultsTable";
@@ -165,3 +149,31 @@ function displayResults(results, name, email) {
     const form = document.getElementById("quizform");
     form.parentNode.insertBefore(resultsDiv, form.nextSibling);
 }
+
+// Function to handle form submission
+document.getElementById("quizform").addEventListener("submit", async function (event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+
+    const form = document.getElementById("quizform");
+
+    // Validate the form
+    if (!validateForm(form)) {
+        alert("Please answer all questions and fill out your name and email before submitting.");
+        return;
+    }
+
+    // Collect form data
+    const formData = collectFormData(form);
+
+    // Handle file upload (if any)
+    const finalFormData = await handleFileUpload(formData);
+
+    // Send data to the Flask backend
+    await sendData(finalFormData);
+
+    // Display results
+    displayResults(finalFormData.questions, finalFormData.name, finalFormData.email);
+
+    // Reset the form
+    //form.reset();
+});

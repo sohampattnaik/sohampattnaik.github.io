@@ -3920,3 +3920,8 @@ div#resultsTable {
 div#resultsTable h2, div#resultsTable p {
   color: #28a745;
 }
+
+#imageUpload,#feedback {
+  padding: 0px;
+}
+

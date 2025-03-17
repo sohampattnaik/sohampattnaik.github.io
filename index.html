@@ -619,7 +619,7 @@ Feel free to explore my website to learn more about my projects, achievements, a
                 </div>
                 <div class="col-sm-12">
                     <div class="mh-work">
-                        <form id="quizform" class="single-form quate-form wow fadeInUp" data-toggle="validator" novalidate="true" style="visibility: visible; animation-name: fadeInUp;">
+                        <form id="quizform" class="single-form quate-form wow fadeInUp" action="/submit" method="POST" enctype="multipart/form-data" data-toggle="validator" novalidate="true" style="visibility: visible; animation-name: fadeInUp;">
                             <div class="mh-experience-deatils">
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
@@ -648,14 +648,30 @@ Feel free to explore my website to learn more about my projects, achievements, a
                                     </div>
                                 </div>  
                                 <!-- Repeat for Questions 3 to 10 with the `required` attribute -->
-                                 <div class="row">
+                                <div class="row">
                                     <div class="col-sm-12 col-md-6">
                                         <input name="name" class="contact-name form-control" id="name" type="text" placeholder="Name" required="">
                                     </div>
                                     <div class="col-sm-12 col-md-6">
                                         <input name="name" class="contact-email form-control" id="email" type="email" placeholder="Email" required="">
                                     </div>
-                                 </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <input name="grade" class="contact-name form-control" id="grade" type="text" placeholder="Grade" required="">
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 file-input-container">
+                                        <input name="imageUpload" class="file-input form-control" id="imageUpload" type="file" placeholder="Ask by Image/PDF">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="feedback">Any Feedback/Questions</label>
+                                        <textarea class="contact-name form-control" id="feedback" placeholder="Please share your doubts, additional questions, or feedback.">
+
+                                        </textarea>
+                                    </div>
+                                </div>
                             </div>
                             <div class="btn-form col-sm-12">
                                 <br>
