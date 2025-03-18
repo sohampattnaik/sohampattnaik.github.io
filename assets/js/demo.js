@@ -1,7 +1,15 @@
-// Function to send data to the Flask backend
 async function sendData(data) {
+    const submitButton = document.getElementById("form-submit");
+    const buttonText = document.getElementById("button-text");
+    const buttonSpinner = document.getElementById("button-spinner");
+
     try {
-        const response = await fetch('http://127.0.0.1:5000/submit', {
+        // Change button text and show spinner
+        buttonText.textContent = "Submitting in progress...";
+        buttonSpinner.style.display = "inline";
+        submitButton.disabled = true;
+
+        const response = await fetch('https://demomailer-brevo-app.orangesky-e75b328a.westus2.azurecontainerapps.io/submit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -12,13 +20,21 @@ async function sendData(data) {
         const result = await response.json();
         if (response.ok) {
             alert(result.message);
+            console.log(result);
         } else {
             alert(result.error);
+            console.log(result);
         }
     } catch (error) {
         alert('An error occurred while submitting the form.');
+    } finally {
+        // Restore button text and hide spinner
+        buttonText.textContent = "Submit";
+        buttonSpinner.style.display = "none";
+        submitButton.disabled = false;
     }
 }
+
 // Function to validate email format
 function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email regex
@@ -120,7 +136,7 @@ function displayResults(results, name, email) {
     textDiv.innerHTML = `
         <h2>Your Request was successfully submitted</h2>
         <h2>Thank you for taking the quiz!</h3>
-        <p>You will hear back your results from Soham shortly, Meanwhile review your submissions:</p>
+        <p>You will hear back your results shortly, Meanwhile review your submissions:</p>
     `;
     table.innerHTML = `
         <thead>
@@ -148,6 +164,20 @@ function displayResults(results, name, email) {
     // Append the results table below the form
     const form = document.getElementById("quizform");
     form.parentNode.insertBefore(resultsDiv, form.nextSibling);
+
+    // Add fade-in animation
+    resultsDiv.classList.add("fadeIn");
+
+    // Set timeout for fade-out animation after 5 seconds
+    setTimeout(() => {
+        // Add fade-out animation
+        resultsDiv.classList.add("fadeOut");
+
+        // Remove the resultsDiv from the DOM after the fade-out animation completes
+        resultsDiv.addEventListener("animationend", () => {
+            resultsDiv.remove();
+        }, { once: true }); // Ensure the event listener is removed after firing once
+    }, 5000); // 5000ms = 5 seconds
 }
 
 // Function to handle form submission
@@ -175,5 +205,5 @@ document.getElementById("quizform").addEventListener("submit", async function (e
     displayResults(finalFormData.questions, finalFormData.name, finalFormData.email);
 
     // Reset the form
-    //form.reset();
+    form.reset();
 });
