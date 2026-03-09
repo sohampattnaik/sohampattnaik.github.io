@@ -106,7 +106,7 @@
                 </div>
             </div>
         </header>
-
+		<!--
         ===================
            ASTRO
         ===================
@@ -121,7 +121,7 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="mh-about-inner">
                             <h2 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s">Astrophotography</h2>
-                            <p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Instagram: @1amsoham</p>
+                            <p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Instagram: @sohaminspace</p>
                             <div class="mh-about-tag wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">
                                 <ul>
                                     <li><span>The Great Red Spot</span></li>
@@ -132,6 +132,59 @@
 									<li><span>Sunspots</span></li>
                                 </ul>
 							</div>
+
+							<!-- Replace or add this inside your desired section, e.g. after <h2>Astrophotography</h2> -->
+							<div id="astroCarousel" class="carousel slide" data-bs-ride="carousel">
+							  <!-- Optional: Indicators (dots at bottom) -->
+							  <div class="carousel-indicators">
+							    <button type="button" data-bs-target="#astroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+							    <button type="button" data-bs-target="#astroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+							    <button type="button" data-bs-target="#astroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+							    <!-- Add more <button> for each image -->
+							  </div>
+							
+							  <!-- Slides -->
+							  <div class="carousel-inner">
+							    <!-- First slide must have .active -->
+							    <div class="carousel-item active">
+							      <img src="assets/images/astro/great-red-spot.jpg" class="d-block w-100" alt="The Great Red Spot on Jupiter">
+							      <!-- Optional caption -->
+							      <div class="carousel-caption d-none d-md-block">
+							        <h5>The Great Red Spot</h5>
+							        <p>Jupiter's massive storm – captured from Virginia Beach</p>
+							      </div>
+							    </div>
+							
+							    <div class="carousel-item">
+							      <img src="assets/images/astro/saturn-rings.jpg" class="d-block w-100" alt="Saturn's Rings">
+							      <div class="carousel-caption d-none d-md-block">
+							        <h5>Saturn's Rings</h5>
+							        <p>Edge-on view with Cassini Division visible</p>
+							      </div>
+							    </div>
+							
+							    <div class="carousel-item">
+							      <img src="assets/images/astro/galilean-moons.jpg" class="d-block w-100" alt="Jupiter's Galilean Moons">
+							      <div class="carousel-caption d-none d-md-block">
+							        <h5>Galilean Moons</h5>
+							        <p>Io, Europa, Ganymede, and Callisto in alignment</p>
+							      </div>
+							    </div>
+							
+							    <!-- Add more .carousel-item divs as needed -->
+							  </div>
+							
+							  <!-- Previous / Next controls -->
+							  <button class="carousel-control-prev" type="button" data-bs-target="#astroCarousel" data-bs-slide="prev">
+							    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							    <span class="visually-hidden">Previous</span>
+							  </button>
+							  <button class="carousel-control-next" type="button" data-bs-target="#astroCarousel" data-bs-slide="next">
+							    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+							    <span class="visually-hidden">Next</span>
+							  </button>
+							</div>
+							
                         </div>
                     </div>
                 </div>
